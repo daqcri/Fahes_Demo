@@ -1,0 +1,139 @@
+{
+"DMVs":
+ [
+{
+"DMV":
+["Loc_name", "DW_Addressing_","90","Rand"]
+},
+{
+"DMV":
+["Status", "M","86","Rand"]
+},
+{
+"DMV":
+["Side", "L","9","Rand"]
+},
+{
+"DMV":
+["Ref_ID", "-1","8","RandSYN"]
+},
+{
+"DMV":
+["X", "0","8","RandSYN"]
+},
+{
+"DMV":
+["Y", "0","8","RandSYN"]
+},
+{
+"DMV":
+["Addr_type", "Address","13","Rand"]
+},
+{
+"DMV":
+["Name", "Kuhn's","7","Rand"]
+},
+{
+"DMV":
+["Score", "0","8","SYN"]
+},
+{
+"DMV":
+["Score", "100","28","SYN"]
+},
+{
+"DMV":
+["ZipCodes", "0","2","SYN"]
+},
+{"DMV":
+["ARC_ZIP","15275","2","OD"]
+}
+],
+"PTRNs":
+ [
+{
+"PTRN":
+["﻿OBJECTID", "d","9", "d2","90"]
+},
+{
+"PTRN":
+["Loc_name", "u2_ul9_","1", "u4_ul6","1"]
+},
+{
+"PTRN":
+["Status", "u","3"]
+},
+{
+"PTRN":
+["Score", "d","1", "d2td","6", "d2td2","40", "d3","1"]
+},
+{
+"PTRN":
+["Match_type", "u","1"]
+},
+{
+"PTRN":
+["Match_addr", "d+w+d+","87", "d+wd+w+d+","1", "d+wdw+d+","2", "dw+d+","1"]
+},
+{
+"PTRN":
+["Side", "u","2"]
+},
+{
+"PTRN":
+["Ref_ID", "d4","1", "d5","11", "d7","79", "hd","1"]
+},
+{
+"PTRN":
+["X", "d","1", "d7td5","5", "d7td6","85", "hd2td6","1"]
+},
+{
+"PTRN":
+["Y", "d","1", "d2td6","1", "d6td4","1", "d6td5","11", "d6td6","78"]
+},
+{
+"PTRN":
+["User_fld", "d","1"]
+},
+{
+"PTRN":
+["Addr_type", "ul5ul6","1", "ul6","1"]
+},
+{
+"PTRN":
+["ARC_Street", "d+w+","90", "d+wd+w+","2", "d+wdw+","1", "dw+","1", "w+","3"]
+},
+{
+"PTRN":
+["ARC_City", "a+","36", "a+sa+","35", "a+sa+sa+","1", "a+sa+t","5", "a+tsa+","2"]
+},
+{
+"PTRN":
+["ARC_State"]
+},
+{
+"PTRN":
+["ARC_ZIP", "d5","52"]
+},
+{
+"PTRN":
+["Name", "w+","18"]
+},
+{
+"PTRN":
+["Municipali", "a+","36", "a+sa+","35", "a+sa+sa+","1", "a+sa+t","5", "a+tsa+","2"]
+},
+{
+"PTRN":
+["Address", "d+w+","90", "d+wd+w+","2", "d+wdw+","1", "dw+","1", "w+","3"]
+},
+{
+"PTRN":
+["Municipa_1", "ul+","20", "ul+sul+","9", "ul+sul+t","1", "ulul+","1"]
+},
+{
+"PTRN":
+["ZipCodes", "d","1", "d5","52"]
+}
+]
+}

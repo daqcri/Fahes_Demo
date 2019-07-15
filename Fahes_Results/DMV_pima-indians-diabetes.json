@@ -1,0 +1,87 @@
+{
+"DMVs":
+ [
+{
+"DMV":
+["Number of times pregnant", "3","75","Rand"]
+},
+{
+"DMV":
+["Plasma glucose concentration", "84","10","Rand"]
+},
+{
+"DMV":
+["Diastolic blood pressure", "0","35","RandSYN"]
+},
+{
+"DMV":
+["Triceps skin fold thickness", "0","227","RandSYN"]
+},
+{
+"DMV":
+["2-Hour serum insulin", "0","373","RandSYN"]
+},
+{
+"DMV":
+["Age", "21","63","Rand"]
+},
+{
+"DMV":
+["Plasma glucose concentration", "0","5","SYN"]
+},
+{
+"DMV":
+["Triceps skin fold thickness", "7","2","SYN"]
+},
+{
+"DMV":
+["Triceps skin fold thickness", "8","2","SYN"]
+},
+{
+"DMV":
+["Body mass index", "0","11","SYN"]
+},
+{"DMV":
+["Number of times pregnant","0","111","OD"]
+}
+],
+"PTRNs":
+ [
+{
+"PTRN":
+["Number of times pregnant", "d","10", "d2","7"]
+},
+{
+"PTRN":
+["Plasma glucose concentration", "d","1", "d2","37", "d3","98"]
+},
+{
+"PTRN":
+["Diastolic blood pressure", "d","1", "d2","38", "d3","8"]
+},
+{
+"PTRN":
+["Triceps skin fold thickness", "d","3", "d2","48"]
+},
+{
+"PTRN":
+["2-Hour serum insulin", "d","1", "d2","65", "d3","120"]
+},
+{
+"PTRN":
+["Body mass index", "d","1", "d2","25", "d2td","222"]
+},
+{
+"PTRN":
+["Diabetes pedigree function", "dtd","7", "dtd2","38", "dtd3","472"]
+},
+{
+"PTRN":
+["Age", "d2","52"]
+},
+{
+"PTRN":
+["Class variable", "d","2"]
+}
+]
+}

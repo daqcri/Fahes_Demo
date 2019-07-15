@@ -1,0 +1,47 @@
+{
+"DMVs":
+ [
+{"DMV":
+["Position Title","Police Officer III","906","Rand"]
+}
+],
+"PTRNs":
+ [
+{
+"PTRN":
+["Full Name", "w+","9073", "w+dw+","1"]
+},
+{
+"PTRN":
+["Gender", "u","2"]
+},
+{
+"PTRN":
+["Department", "u3","38"]
+},
+{
+"PTRN":
+["Department Name", "w+","38"]
+},
+{
+"PTRN":
+["Division", "w+","676"]
+},
+{
+"PTRN":
+["Assignment Category", "ul7hul6","2"]
+},
+{
+"PTRN":
+["Position Title", "w+","364", "w+/w+","17"]
+},
+{
+"PTRN":
+["Underfilled Job Title", "w+","74", "w+/w+","3", "w+d+w+","1"]
+},
+{
+"PTRN":
+["Date First Hired", "d/d/d2","509", "d/d2/d2","1205", "d2/d/d2","185", "d2/d2/d2","372"]
+}
+]
+}
