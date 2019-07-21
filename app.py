@@ -67,7 +67,8 @@ def get_csv_files(folder):
         if item.endswith('.csv'):
             csv_files.append(item)
     return csv_files
-
+def is_non_zero_file(fpath):  
+    return os.path.isfile(fpath) and os.path.getsize(fpath) > 0
 
 def dynamic_page():
     return html.Div([
@@ -270,6 +271,8 @@ def update_output_discovery(n_clicks, fname):
     if fname:
         tab_name = os.path.join(DATA_FOLDER, fname)
         dmvs_table_name = executeFahes(tab_name)
+        if not(is_non_zero_file(dmvs_table_name)):
+            return html.Div(['No DMVs Found'])
         with open (dmvs_table_name) as json_file:
             gresults = json.load(json_file)
         if len(gresults) > 0:
@@ -340,7 +343,7 @@ def render_content(tab, tab_name):
                 data=dmvs_df.to_dict('records'),
                 columns=[{'name': i, 'id': i} for i in dmvs_df.columns],
                 id='fahes-table',
-                # row_selectable="single",
+                row_deletable=True,
                 css=[{
                     'selector': '.dash-cell div.dash-cell-value',
                     'rule': 'display: inline; white-space: inherit; margin-left: 20px; overflow: inherit; text-overflow: inherit;'
@@ -371,7 +374,8 @@ def render_content(tab, tab_name):
                 }
             ),
                 # html.H3('Select an attribute to see the patterns extracted from the attribute.'),
-                # html.Div(id='patterns-container', className="six columns"), 
+                # html.Div(id='dmvs-container-hidden', className="six columns"), 
+                html.Div(id='dmvs-container-hidden', style={'display':'none'}),
             ], className="row ")
         else:
             return html.Div([''])
@@ -393,7 +397,7 @@ def render_content(tab, tab_name):
                 columns=[{'name': i, 'id': i} for i in dmvs_df.columns],
                 id='syn-table',
                 row_selectable="single",
-                row_deletable=True,
+                # row_deletable=True,
                 css=[{
                     'selector': '.dash-cell div.dash-cell-value',
                     'rule': 'display: inline; white-space: inherit; margin-left: 20px; overflow: inherit; text-overflow: inherit;'
@@ -447,7 +451,7 @@ def render_content(tab, tab_name):
                 columns=[{'name': i, 'id': i} for i in dmvs_df.columns],
                 id='od-table',
                 row_selectable="single",
-                row_deletable=True,
+                # row_deletable=True,
                 css=[{
                     'selector': '.dash-cell div.dash-cell-value',
                     'rule': 'display: inline; white-space: inherit; margin-left: 20px; overflow: inherit; text-overflow: inherit;'
@@ -501,7 +505,7 @@ def render_content(tab, tab_name):
                 columns=[{'name': i, 'id': i} for i in dmvs_df.columns],
                 id='rand-table',
                 row_selectable="single",
-                row_deletable=True,
+                # row_deletable=True,
                 css=[{
                     'selector': '.dash-cell div.dash-cell-value',
                     'rule': 'display: inline; white-space: inherit; margin-left: 20px; overflow: inherit; text-overflow: inherit;'
@@ -537,6 +541,34 @@ def render_content(tab, tab_name):
             ], className="row ")
         else:
             return(html.Div(['']))
+
+
+
+@app.callback(Output('dmvs-container-hidden', 'children'),
+              [Input('fahes-table', 'data_previous')],
+              [State('fahes-table', 'data')])
+def show_removed_rows(previous, current):
+    global gresults
+    if previous is None:
+        dash.exceptions.PreventUpdate()
+    else:
+        for row in previous:
+            if row not in current:
+                rem_att = row['Attribute']
+                rem_val = row['Value']
+                for jj in range(len(gresults['DMVs'])):
+                    if gresults['DMVs'][jj]['DMV'][0] == row['Attribute'] and gresults['DMVs'][jj]['DMV'][1] == row['Value']:
+                        gresults['DMVs'].remove(gresults['DMVs'][jj])
+                        # print(gresults['pfds'][jj]['det'], gresults['pfds'][jj]['dep'], jj)
+                        break
+                # print(row['Determinant'][0], '===>', row['Dependent'][0])
+        return html.Div([
+                # html.H3('The selected attribute is ( ' + derived_virtual_selected_rows[0] + ' )')
+                html.H3(""),
+            ])
+
+
+
 
 
 @app.callback(
