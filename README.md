@@ -19,6 +19,6 @@ Build and run:
 
     docker build -t fahes_demo .
     docker run -it -p 8056:8056 fahes_demo
-
-Run the demo:
     Open a web browser and write http://0.0.0.0:8056/ in the address bar.
+Run from built docker image:
+    docker run -it -p 8056:8056 qahtanaa/fahes_gui
