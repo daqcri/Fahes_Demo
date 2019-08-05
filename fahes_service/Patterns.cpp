@@ -21,11 +21,9 @@ void check_and_push(vector<string> & results_ptrn){
 	string ptrn = results_ptrn[results_ptrn.size()-1];
 	if (ptrn[0] == 'w'){
 			results_ptrn[results_ptrn.size()-1] = W_plus;
-			// cout << "check1" << endl;
 	}
 	else {
 		results_ptrn.push_back(W_plus);
-		// cout << "check2";
 	}
 }
 // ==============================================================
@@ -61,10 +59,6 @@ vector<string> pattern_learner::apply_L4_tricks(vector<string> ptrn){
 			results_ptrn.push_back(ptrn[k]);
 	}
 	if(!results_ptrn.empty()){
-		// ptrn_str = "";
-		// for (int k = 0; k < (int) results_ptrn.size(); k++)
-		// 	ptrn_str += results_ptrn[k];
-		// cout << ptrn_str << endl;
 		return results_ptrn;
 	}
 	return ptrn;
@@ -77,8 +71,6 @@ vector<string> pattern_learner::apply_L5_tricks(vector<string> ptrn){
 	string ptrn_str = "";
 	for (int k = 0; k < (int) ptrn.size(); k++)
 		ptrn_str += ptrn[k];
-
-	// cout << "L4 Tricks is applied on : " << ptrn_str << '\t';
 
 	if (ptrn.size() == 3){
 		if ((ptrn[0][0] == DIGIT) && ((ptrn[1][0] == DOT)) && ((ptrn[1].length() == 1)) && ((ptrn[2][0] == DIGIT)))
@@ -178,8 +170,6 @@ vector < map<string, long> > pattern_learner::find_all_patterns(vector<map<strin
 	map<string, long>::iterator string_itr;
 	for (long i = 0; i < (long)tabhist.size(); i++) {
 		col_hist = tabhist[i];
-		// cout << "========================================================================\n";
-		// cout << "Current Attribute = " << TP.header[i] << '\t';
 		L1_patterns(col_hist, ptrns_vec, ptrns_str, ptrns_hist);
 		AGG_Level[TP.header[i]] = 1;
 		agg_itr = AGG_Level.find(TP.header[i]);
@@ -206,59 +196,23 @@ vector < map<string, long> > pattern_learner::find_all_patterns(vector<map<strin
 		dominating_pttrns.clear();
 		map<string, bool>::iterator dom_pttrns_itr;
 		all_atts_ptrns.push_back(ptrns_hist);
-		// cout << "========================================\n";
-		// cout << TP.table_name << "::" << TP.header[i] << endl;
 		determine_dominating_patterns(ptrns_hist, dominating_pttrns);
-		// dom_pttrns_itr = dominating_pttrns.begin();
-		// while(dom_pttrns_itr != dominating_pttrns.end()){
-		// 	cout << dom_pttrns_itr->first << "\t{" << dom_pttrns_itr->second << "}\n";
-		// 	dom_pttrns_itr++;
-		// }
 		string_itr = TP.profile[i].common_Strings.begin();
 		while (string_itr != TP.profile[i].common_Strings.end()){
 			string s = string_itr->first;
 			test_ptrn = get_cell_pttrn(s, agg_itr->second);
-			// for (dom_pttrns_itr = dominating_pttrns.begin(); dom_pttrns_itr != dominating_pttrns.end(); dom_pttrns_itr++){
-			// 	if (test_ptrn == dom_pttrns_itr->first){
-					dom_pttrns_itr = dominating_pttrns.find(test_ptrn);
-					if(dom_pttrns_itr == dominating_pttrns.end()){
-						cerr << "Pattern not found .. ";
-					}
-					else
-					if (!dom_pttrns_itr->second){
-						add_sus_struct(TP.header[i], s, 1.0, string_itr->second, "SYN", sus_dis_values);
-						// if (!member_of(sus_dis, sus_dis_values))
-						// sus_dis_values.push_back(sus_dis);
-					}
+			dom_pttrns_itr = dominating_pttrns.find(test_ptrn);
+			if(dom_pttrns_itr == dominating_pttrns.end()){
+				cerr << "Pattern not found .. ";
+			}
+			else
+				if (!dom_pttrns_itr->second){
+					add_sus_struct(TP.header[i], s, 1.0, string_itr->second, "SYN", sus_dis_values);
+				}
 
-			// 	}
-			// }
-			
 			string_itr ++;
 		}
 		
-		// for (ptrn_hist_itr = ptrns_hist.begin(); ptrn_hist_itr != ptrns_hist.end(); ptrn_hist_itr++){
-		// 	cout << "{" << ptrn_hist_itr->first << "} {" << ptrn_hist_itr->second << "}\t";
-		// 	vector<string> cells_with_pattern;
-		// 	// if ((ptrn_hist_itr->second < 20) && ptrns_hist.size() < 20){
-		// 	if (ptrn_hist_itr->second < 20){	
-		// 		string test;
-		// 		for (int k = 0; k < (int)ptrns_vec.size(); k++){
-		// 			while (!cells_with_pattern.empty())		cells_with_pattern.pop_back();
-		// 			test = "";
-		// 			for (int j = 0; j < (int)ptrns_vec[k].size(); j++)
-		// 				test += ptrns_vec[k][j];
-		// 			if (test == ptrn_hist_itr->first){ 				
-		// 				cells_with_pattern = get_cells_with_given_pattern(ptrns_vec[k], col_hist, agg_itr->second);
-		// 				cout << "{";
-		// 				for (int m = 0; m < (int) cells_with_pattern.size()-1; m++)
-		// 					cout << check_d_quotation(cells_with_pattern[m]) << ", ";
-		// 				cout << check_d_quotation(cells_with_pattern[cells_with_pattern.size()-1]) << "}";
-		// 			}
-		// 		}
-		// 	}
-		// 	cout << endl;
-		// }
 	}
 	return all_atts_ptrns;
 }

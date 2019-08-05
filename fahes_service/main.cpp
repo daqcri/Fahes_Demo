@@ -10,7 +10,7 @@
 #include "common.h"
 #include "DV_Detector.h"
 #include "OD.h"
-#include "Fast_DiMaC.h"
+#include "RandomDMV.h"
 #include "Patterns.h"
  long max_num_terms_per_att = 200;
 
@@ -104,27 +104,30 @@ void Print_output_data(string output_dir, string tab_name, vector<sus_disguised>
             << "\"]\n}\n";
     ofs << "],";
     ofs << "\n\"PTRNs\":\n [\n";
-    for (size_t i = 0; i < T_Header.size()-1; i++){
-        ofs << "{\n" << "\"PTRN\":\n[\"" << T_Header[i] << "\"";
-        map<string, long>::iterator itr = ptrns[i].begin();
-        while(itr != ptrns[i].end()){
-            ofs << ", \"" << itr->first
-                << "\",\"" << itr->second<< "\"";
-                // << "," << sus_dis_values[i].score
-                itr ++;
-            }
-            ofs << "]\n},\n";
+    if (ptrns.size() > 0){
+        for (size_t i = 0; i < T_Header.size()-1; i++){
+            ofs << "{\n" << "\"PTRN\":\n[\"" << T_Header[i] << "\"";
+            map<string, long>::iterator itr = ptrns[i].begin();
+            while(itr != ptrns[i].end()){
+                ofs << ", \"" << itr->first
+                    << "\",\"" << itr->second<< "\"";
+                    // << "," << sus_dis_values[i].score
+                    itr ++;
+                }
+                ofs << "]\n},\n";
+        }
+        k = T_Header.size()-1;
+        ofs << "{\n" << "\"PTRN\":\n[\"" << T_Header[k] << "\"";
+            map<string, long>::iterator itr = ptrns[k].begin();
+            while(itr != ptrns[k].end()){
+                ofs << ", \"" << itr->first
+                    << "\",\"" << itr->second << "\"";
+                    // << "," << sus_dis_values[i].score
+                    itr ++;
+                }
+        ofs << "]\n}\n";
     }
-    k = T_Header.size()-1;
-    ofs << "{\n" << "\"PTRN\":\n[\"" << T_Header[k] << "\"";
-        map<string, long>::iterator itr = ptrns[k].begin();
-        while(itr != ptrns[k].end()){
-            ofs << ", \"" << itr->first
-                << "\",\"" << itr->second << "\"";
-                // << "," << sus_dis_values[i].score
-                itr ++;
-            }
-    ofs << "]\n}\n" << "]\n}\n";
+    ofs << "]\n}\n";
     // ofs.close();
 }
 
@@ -168,7 +171,7 @@ void execute(char * table_name, char * out_directory) {
     log_fid << T.table_name << "  has : " << T.data[0].size() << "  attributes" 
          << "  and  " << T.data.size() << "  Tuples." << endl;
 
-    F_DiMaC FDiMaC;
+    RandomDMV RandDMV;
     DataProfiler * dvdDataProfiler = new DataProfiler();
     TableProfile TP;
     vector<struct item> most_common;
@@ -178,7 +181,7 @@ void execute(char * table_name, char * out_directory) {
     TP = dvdDataProfiler->profile_table(T, tablehist);
     pattern_learner * PL = new pattern_learner();
     
-    sus_dis_values = FDiMaC.find_disguised_values(T, tablehist, max_num_terms_per_att);
+    sus_dis_values = RandDMV.find_disguised_values(T, tablehist, max_num_terms_per_att);
     vector < map<string, long> > all_ptrns;
     all_ptrns = PL->find_all_patterns(tablehist, TP, sus_dis_values);
     DVD.check_non_conforming_patterns(TP, tablehist, sus_dis_values);

@@ -4,6 +4,7 @@ import json
 from os import listdir
 import ctypes
 from ctypes import c_char_p
+import sys
 
 global tool_loc
 tool_loc = "./fahes_service/"
@@ -47,4 +48,22 @@ def callFahes(tab_full_name, output_dir):
     Fahes.execute(tab_name, out_dir)
     
 
+def main():
+    # check arguments
+    # for arg in sys.argv[1:]:
+    if(len(sys.argv) != 2):
+        print("Wrong number of arguments .. entered (",len(sys.argv),")")
+        # print(sys.argv, file=sys.stderr)
+        print("Usage (",sys.argv[0],"): <data file name>")
+        sys.exit(1)
 
+    table_name = os.path.abspath(sys.argv[1]);
+    
+    # print(table_name)
+    executeFahes(table_name)
+    
+
+
+
+if __name__ == "__main__":
+    main()

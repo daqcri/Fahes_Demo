@@ -23,18 +23,6 @@
 #include <math.h>
 #include <limits.h>
 
-// #ifdef __APPLE__
-// #include <unordered_map>
-// #include <unordered_set>
-// #else
-// #include <tr1/unordered_map>
-// #include <tr1/unordered_set>
-// #endif
-
-// 
-// #ifndef __APPLE__
-// using namespace tr1;
-// #endif
 
 using namespace std;
 #define MIN(X,Y) ((X) < (Y) ? (X) : (Y))

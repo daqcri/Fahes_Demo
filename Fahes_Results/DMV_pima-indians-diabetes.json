@@ -11,11 +11,11 @@
 },
 {
 "DMV":
-["Diastolic blood pressure", "0","35","RandSYN"]
+["Diastolic blood pressure", "0","35","RandSYNOD"]
 },
 {
 "DMV":
-["Triceps skin fold thickness", "0","227","RandSYN"]
+["Triceps skin fold thickness", "0","227","RandSYNOD"]
 },
 {
 "DMV":
@@ -27,7 +27,7 @@
 },
 {
 "DMV":
-["Plasma glucose concentration", "0","5","SYN"]
+["Plasma glucose concentration", "0","5","SYNOD"]
 },
 {
 "DMV":
@@ -39,7 +39,7 @@
 },
 {
 "DMV":
-["Body mass index", "0","11","SYN"]
+["Body mass index", "0","11","SYNOD"]
 },
 {"DMV":
 ["Number of times pregnant","0","111","OD"]

@@ -185,41 +185,7 @@ long check_data_type(const string& s ){
     if (isNULL(s))      return 2;
     return 3;
 }
-// ========================================================================
-// double check_str_repetition(const string str){
-//     int min_dist_idx, min_dist;
-//     double s = 0, sqs = 0, count = 0, std_dev;
-//     if (str.length() < 5)
-//         return 1.0;
-//     min_dist = abs(str[0] - str[1]);
-//     min_dist_idx = 1;
-//     for (int j = 1; j < (int)str.length(); j++){
-//         if (abs(str[0] - str[j]) < min_dist){
-//             min_dist = abs(str[0] - str[j]);
-//             min_dist_idx = j;
-//         }
-//     }
-//     // if ((!isNumber(str)) && (min_dist_idx > 1))
-//     if (min_dist_idx > 1)
-//         return 1.0;
 
-//     if (min_dist_idx > (int)(str.length()/2))
-//         for (int k = 0; k < (int)str.length() - 1; k++){
-//             s += abs(str[k] - str[k+1]);
-//             sqs += abs(str[k] - str[k+1]) * abs(str[k] - str[k+1]);
-//             count ++;
-//         }
-//     else
-//         for (int k = 0; k < (int)str.length() - min_dist_idx; k++){
-//             double a = abs(str[k] - str[k+min_dist_idx]);
-//             s += a;
-//             sqs += a * a;
-//             count ++;
-//         }
-//     std_dev = compute_std(s, sqs, count);
-    
-//     return std_dev;
-// }
 // ========================================================================
 double check_str_repetition(const string str){
     int min_dist_idx, min_dist;
@@ -255,37 +221,17 @@ double check_str_repetition(const string str){
     
     return std_dev;
 }
-// // ========================================================================
-// double check_str_repetition(const string val){
-//     int rep_threshold = 5;
-//     long longest_rep_str = 0;
-//     if ((long)val.length() < rep_threshold)
-//         return 1.0;
-//     for (long i = 0; i < val.length() - 1; i++){
-//         if (!isdigit(val[i])){
-//             if (val[i] != val[i+1]) 
-//                 longest_rep_str = 0;
-//             else{
-//                 if (longest_rep_str == 0)
-//                     longest_rep_str = 2;
-//                 else
-//                     longest_rep_str ++;
-//             }
-//             if(longest_rep_str >= rep_threshold)
-//                 return 0.0;
-//         }
-//     }
-//     return 1.0;
-// }
+
 // ========================================================================
 void add_sus_struct(string att, string s, double score, long freq, string tool,
                                 vector<sus_disguised> & s_vec){
-    for (size_t i = 0; i < s_vec.size(); i ++)
+    for (size_t i = 0; i < s_vec.size(); i ++){
         if ((s == s_vec[i].value) && (att == s_vec[i].attr_name)){
             if (s_vec[i].tool_name.find(tool) == std::string::npos)
                 s_vec[i].tool_name += tool;
             return;
         }
+    }
 
     sus_disguised sus_dis_struct;
     sus_dis_struct.attr_name = att;

@@ -21,7 +21,6 @@ private:
 	long get_table(const string &filepath, vector<string> &header, doubleVecStr &data);
 public:
 	CSV_READER() {}
-	// Table T;
 	Table read_csv_file(string file_name);
 	bool check_file_type(std::string const & value, std::string const & ending);
 	void display_table(const Table &T);

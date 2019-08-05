@@ -37,9 +37,7 @@
 
 class pattern_learner{
 public:
-	// vector<vector<string> > patterns;
 	pattern_learner(){}
-	// map<long, long>	patterns_hist;
 	vector<string> L1_pattern(string str);
 	vector < map<string, long> > find_all_patterns(vector<map<string, long> > & tabhist, 
 										TableProfile & TP,
@@ -133,11 +131,7 @@ public:
 		return false;
 	}
 	// ==============================================================
-	// bool match_L6(char cch, char ch){
-	// 	if ((ch == SPALPHA) && (cch == WORDP))	return true;
-	// 	if (cch == ch)							return true;
-	// 	return false;
-	// }
+	
 };
 
 #endif

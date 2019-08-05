@@ -70,11 +70,7 @@ long CSV_READER::get_number_of_rows(std::istream &in) {
 // ========== Read Data to Create a Placeholder for the Output of the Data Cleaning Tools ============
 Table CSV_READER::read_csv_file(string file_name) {
       long num_of_cols, num_of_rows = 0, num_skipped = 0;
-      // check if the file is comma separated file or not
-      // if (!check_file_type(file_name, "csv")) {
-      //   cerr << "Not a csv file ..........(" << file_name << ")\n";
-      //   exit(0);
-      // }
+      
       // === = Open the file and create the results placeholder === == ===
       ifstream in(file_name, ios::in);
       if (!in.good())
@@ -104,7 +100,6 @@ Table CSV_READER::read_csv_file(string file_name) {
           num_skipped ++;
       }
       Table T(file_name, num_of_rows, num_of_cols, header, data);
-      // cerr << "Skipped records = " << num_skipped << endl;
   return T;
 }
 

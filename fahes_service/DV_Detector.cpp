@@ -7,7 +7,7 @@
 #include "DV_Detector.h"
 #include "OD.h"
 #include "Profiler.h"
-#include "Fast_DiMaC.h"
+#include "RandomDMV.h"
 
 
 void compute_statistical_quantities(const Table & T, vector<double> & subT_mean, 
@@ -166,26 +166,20 @@ void DV_Detector::check_repeated_substrings(TableProfile TP,
 			string s = itr->first;
 			transform( s.begin(), s.end(), s.begin(), ::tolower );
 			std_dev = check_str_repetition(s);
-			// if (s == "00000000") cerr << "Got it1 (" << s << "," << std_dev << ")\n";
 			if (std_dev == 0)
 				num_rep_substr ++;
 			itr++;
 		}
 		if (num_rep_substr > 0){
-			// cout << TP.header[i] << '\t';
-			// cout << "num_strs_containing_rep_substr = " << num_rep_substr << "\tOut of :" << M[i].size() << endl;
 			if ((double) num_rep_substr < (threshold * (double) M[i].size())){			
 				string_itr = TP.profile[i].common_Strings.begin();
 				while (string_itr != TP.profile[i].common_Strings.end()){
 					string s = string_itr->first;
-					// if (TP.header[i] == "Hr Org Unit Id") cerr << "Common (" << s << ")\n";
 					transform( s.begin(), s.end(), s.begin(), ::tolower );
 					std_dev = check_str_repetition(s);
-					// if (s == "00000000") cerr << "Got it2 (" << s << "," << std_dev << ")\n";
 					if (std_dev == 0){
 						add_sus_struct(TP.header[i], string_itr->first, sc, string_itr->second, "SYN", sus_dis_values);
-						// if (!member_of(sus_disg, sus_dis_values))
-						// 	sus_dis_values.push_back(sus_disg);
+						
 					}
 					string_itr ++;
 				}
@@ -197,13 +191,9 @@ void DV_Detector::check_repeated_substrings(TableProfile TP,
 void DV_Detector::check_non_conforming_patterns(TableProfile & TP, 
 				vector<map<string, long> > & M,
     			std::vector<sus_disguised> & sus_dis_values){
-	// cerr << "Start : detect_single_char_strings\n"; 
 	detect_single_char_strings(TP, sus_dis_values);
-	// cerr << "Done : detect_single_char_strings\n"; 
 	positive_negative_inconsistency(TP, sus_dis_values);
-	// cerr << "Done : positive_negative_inconsistency\n";
 	check_repeated_substrings(TP, M, sus_dis_values);
-	// cerr << "Done : check_repeated_patterns\n";
 }
 
 
